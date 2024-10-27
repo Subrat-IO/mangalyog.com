@@ -1,1 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangal Yog</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        /* Banner Section */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('https://thumbs.dreamstime.com/b/lord-ganesha-statue-candles-dark-background-ai-generated-328668248.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f8a20f;
+        }
+
+        /* Navbar */
+        nav {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #f8a20f;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: #f8a20f;
+            cursor: pointer;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 70%;
+                background: rgba(0, 0, 0, 0.9);
+                text-align: left;
+                padding-top: 60px;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(-100%);
+            }
+
+            .nav-links.active {
+                display: flex;
+                transform: translateX(0);
+            }
+
+            .nav-links a {
+                padding: 15px 20px;
+                color: #f8a20f;
+                text-decoration: none;
+                font-size: 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                color: #f8a20f;
+            }
+        }
+
+        /* Centered Text in Banner */
+        .banner-content {
+            text-align: center;
+            max-width: 80%;
+            margin-top: 100px;
+            position: relative;
+        }
+
+        .banner-content h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+            border-right: 3px solid #f8a20f;
+        }
+
+        .banner-content p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #f8a20f;
+            background: none;
+            border: 2px solid #f8a20f;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        /* Responsive Bubble Buttons */
+        .highlight-buttons {
+            position: absolute;
+            right: 20px;
+            top: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .highlight-button {
+            background-color: #f8a20f;
+            padding: 10px 15px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 50%;
+        }
+
+        /* Staggered Animation for Buttons */
+        .highlight-button:nth-child(1) { animation: fadeIn 1s forwards 0.5s; }
+        .highlight-button:nth-child(2) { animation: fadeIn 1s forwards 1s; }
+        .highlight-button:nth-child(3) { animation: fadeIn 1s forwards 1.5s; }
+        .highlight-button:nth-child(4) { animation: fadeIn 1s forwards 2s; }
+        .highlight-button:nth-child(5) { animation: fadeIn 1s forwards 2.5s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Rashis Section */
+        .rashis-container {
+            width: 100%;
+            padding: 20px;
+            background-color: yellow;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .rashis-table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .rashis-table th, .rashis-table td {
+            color: darkgoldenrod;
+            border: 2px solid red;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Description Display */
+        .rashi-description {
+            display: none;
+            background-color: #ffe680;
+            color: #8b4513;
+            padding: 10px;
+            border: 1px solid #8b0000;
+            border-radius: 5px;
+            width: 60%;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: yellow;
+            color: darkgoldenrod;
+        }
+
+        /* Mobile button adjustment */
+        @media (max-width: 768px) {
+            .highlight-buttons {
+                flex-direction: row;
+                gap: 5px;
+                top: 80%;
+                width: 100%;
+                justify-content: center;
+            }
+            .highlight-button {
+                font-size: 0.8em;
+                padding: 8px 12px;
+                margin-top: 20px;
+            }
+        }
+        /* Rotating Circle */
+.rotating-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: rotate 8s linear infinite, colorGlow 4s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    overflow: hidden; /* Ensure that the image stays within the circle */
+    position: relative; /* Position for the img */
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes colorGlow {
+    0% {
+        box-shadow: 0 0 20px #ff6666;
+    }
+    25% {
+        box-shadow: 0 0 20px #ffcc66;
+    }
+    50% {
+        box-shadow: 0 0 20px #66ff66;
+    }
+    75% {
+        box-shadow: 0 0 20px #66ccff;
+    }
+    100% {
+        box-shadow: 0 0 20px #ff66ff;
+    }
+}
+
+.wheel-image {
+    width: 100%;  /* Make the image take full width */
+    height: auto; /* Maintain aspect ratio */
+    position: absolute; /* Position absolutely for centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the image */
+}
+
+/* Center the section */
+.wheel-section {
+    text-align: center;
+    padding: 20px;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="banner">
+    <div class="logo">Mangal Yog</div>
+    <nav>
+        <button class="menu-toggle">&#9776;</button>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About Guru Ji</a>
+            <a href="#ganeshvani">About Ganesh Vani</a>
+            <a href="#horoscope">Horoscope 2019</a>
+            <a href="#blogs">Blogs</a>
+        </div>
+    </nav>
+
+    <div class="banner-content">
+        <section class="wheel-section">
+            <div class="rotating-circle">
+                <img src="c:\Users\Subrat\Downloads\zodiac-wheel.png" alt="Rotating Wheel" class="wheel-image">
+            </div>
+        </section>
+        <h1>Mangal Yog</h1>
+        <p>वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।<br> निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥</p>
+        <a href="#guruji" class="button">Watch Guru Ji</a>
+    </div>
+
+    
+    <div class="highlight-buttons">
+        <a href="#"><button class="highlight-button">Button 1</button></a>
+        <a href="#"><button class="highlight-button">Button 2</button></a>
+        <a href="#"><button class="highlight-button">Button 3</button></a>
+        <a href="#"><button class="highlight-button">Button 4</button></a>
+        <a href="#"><button class="highlight-button">Button 5</button></a>
+    </div>
+</div>
+
+<section class="rashis-container">
+    <table class="rashis-table">
+        <thead>
+            <tr>
+                <th><a href="#Aries" class="rashi" data-description="Aries: Bold and ambitious.">Aries</a></th>
+                <th><a href="#Taurus" class="rashi" data-description="Taurus: Reliable and patient.">Taurus</a></th>
+                <th><a href="#Gemini" class="rashi" data-description="Gemini: Adaptable and versatile.">Gemini</a></th>
+            </tr>
+        </thead>
+    </table>
+    <div class="rashi-description"></div>
+</section>
+
+<footer>© 2024 Mangal Yog. All Rights Reserved.</footer>
+
+<script>
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    document.querySelectorAll('.rashi').forEach(rashi => {
+        rashi.addEventListener('click', (e) => {
+            e.preventDefault();
+            const description = rashi.getAttribute('data-description');
+            document.querySelector('.rashi-description').textContent = description;
+            document.querySelector('.rashi-description').style.display = 'block';
+        });
+    });
+</script>
+
+</body>
+</html>
 
